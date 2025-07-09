@@ -17,7 +17,6 @@
             background: linear-gradient(135deg, #2d1b4e 0%, #4a2c64 25%, #6b3d7a 50%, #8e4f90 75%, #b161a6 100%);
             color: #f5f5f5;
             overflow-x: hidden;
-            scroll-behavior: smooth;
         }
 
         .container {
@@ -714,23 +713,30 @@
 
         // Add event listeners for all navigation links
         document.addEventListener('DOMContentLoaded', function() {
-            // Handle all anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
+            // Handle navigation links in the nav bar
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function (e) {
                     e.preventDefault();
+                    e.stopPropagation();
                     const targetId = this.getAttribute('href').substring(1);
+                    console.log('Navigating to:', targetId); // Debug log
                     scrollToSection(targetId);
                 });
             });
 
             // Handle logo click
-            document.querySelector('.logo').addEventListener('click', function() {
+            document.querySelector('.logo').addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Logo clicked'); // Debug log
                 scrollToSection('home');
             });
 
             // Handle CTA button
             document.querySelector('.cta-button').addEventListener('click', function(e) {
                 e.preventDefault();
+                e.stopPropagation();
+                console.log('CTA clicked'); // Debug log
                 scrollToSection('portfolio');
             });
         });
