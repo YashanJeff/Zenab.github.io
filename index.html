@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queen Shades - Fashion Stylist Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #2d1b4e 0%, #4a2c64 25%, #6b3d7a 50%, #8e4f90 75%, #b161a6 100%);
+            color: #f5f5f5;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(45, 27, 78, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 30px rgba(139, 69, 139, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #b161a6, #e6b3ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #e6b3ff;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: #f5f5f5;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #b161a6, #e6b3ff);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+            background: linear-gradient(45deg, #e6b3ff, #f5f5f5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 1s ease 0.2s both;
+            color: #e6b3ff;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #6b3d7a, #b161a6);
+            color: white;
+            padding: 1.2rem 3rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.4s both;
+            box-shadow: 0 10px 30px rgba(139, 69, 139, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(139, 69, 139, 0.6);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section:nth-child(even) {
+            background: rgba(75, 44, 100, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .section h2 {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: #f5f5f5;
+            text-shadow: 2px 2px 8px rgba(139, 69, 139, 0.5);
+            background: linear-gradient(45deg, #e6b3ff, #f5f5f5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 450px;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(139, 69, 139, 0.4);
+            border: 2px solid rgba(230, 179, 255, 0.3);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-text {
+            background: rgba(45, 27, 78, 0.8);
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(139, 69, 139, 0.3);
+            border: 1px solid rgba(230, 179, 255, 0.2);
+        }
+
+        .about-text h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #e6b3ff;
+        }
+
+        .about-text p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #f5f5f5;
+        }
+
+        /* Portfolio Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .portfolio-item {
+            background: rgba(45, 27, 78, 0.8);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(139, 69, 139, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(230, 179, 255, 0.2);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(139, 69, 139, 0.4);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .portfolio-item-content {
+            padding: 2rem;
+        }
+
+        .portfolio-item h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #e6b3ff;
+        }
+
+        .portfolio-item p {
+            color: #f5f5f5;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: rgba(45, 27, 78, 0.8);
+            padding: 2.5rem;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(139, 69, 139, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(230, 179, 255, 0.2);
+        }
+
+        .service-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 25px 50px rgba(139, 69, 139, 0.4);
+        }
+
+        .service-card i {
+            font-size: 3.5rem;
+            color: #b161a6;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #e6b3ff;
+        }
+
+        .service-card p {
+            color: #f5f5f5;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info {
+            background: rgba(45, 27, 78, 0.8);
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(139, 69, 139, 0.3);
+            border: 1px solid rgba(230, 179, 255, 0.2);
+        }
+
+        .contact-info h3 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #e6b3ff;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item i {
+            font-size: 1.8rem;
+            color: #b161a6;
+            margin-right: 1.5rem;
+            width: 35px;
+        }
+
+        .contact-item a {
+            color: #f5f5f5;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .contact-item a:hover {
+            color: #e6b3ff;
+        }
+
+        .contact-item span {
+            color: #f5f5f5;
+            font-size: 1.1rem;
+        }
+
+        .contact-form {
+            background: rgba(45, 27, 78, 0.8);
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(139, 69, 139, 0.3);
+            border: 1px solid rgba(230, 179, 255, 0.2);
+        }
+
+        .contact-form h3 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #e6b3ff;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            color: #e6b3ff;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.2rem;
+            border: 2px solid rgba(230, 179, 255, 0.3);
+            border-radius: 15px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            background: rgba(45, 27, 78, 0.5);
+            color: #f5f5f5;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #b161a6;
+            box-shadow: 0 0 0 3px rgba(177, 97, 166, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #6b3d7a, #b161a6);
+            color: white;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(139, 69, 139, 0.4);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(139, 69, 139, 0.6);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(45, 27, 78, 0.9);
+            color: #f5f5f5;
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid rgba(230, 179, 255, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: #e6b3ff;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #f5f5f5;
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .hero-content p {
+                font-size: 1.4rem;
+            }
+
+            .section h2 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo" onclick="scrollToSection('home')">Queen Shades</div>
+            <ul class="nav-links">
+                <li><a href="#home" onclick="scrollToSection('home')">Home</a></li>
+                <li><a href="#about" onclick="scrollToSection('about')">About</a></li>
+                <li><a href="#portfolio" onclick="scrollToSection('portfolio')">Portfolio</a></li>
+                <li><a href="#services" onclick="scrollToSection('services')">Services</a></li>
+                <li><a href="#contact" onclick="scrollToSection('contact')">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Queen Shades</h1>
+            <p>Professional Fashion Stylist & Creative Director</p>
+            <a href="#portfolio" class="cta-button" onclick="scrollToSection('portfolio')">View My Work</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Fashion Stylist">
+                </div>
+                <div class="about-text">
+                    <h3>Passionate Fashion Stylist</h3>
+                    <p>With a keen eye for detail and a passion for creating stunning visual narratives, I specialize in transforming visions into reality through the art of styling. My approach combines contemporary trends with timeless elegance.</p>
+                    <p>I believe that fashion is more than clothing—it's a powerful form of self-expression that tells a story. Each styling project is an opportunity to create something unique and memorable.</p>
+                    <p>My experience spans editorial shoots, personal styling, brand campaigns, and special events, always with a focus on bringing out the best in every subject and concept.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section">
+        <div class="container">
+            <h2>Portfolio</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1888&q=80" alt="Dark Editorial">
+                    <div class="portfolio-item-content">
+                        <h3>Dark Editorial Campaign</h3>
+                        <p>Moody editorial styling featuring dramatic silhouettes and avant-garde pieces with a focus on texture and contrast.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1888&q=80" alt="Luxury Fashion">
+                    <div class="portfolio-item-content">
+                        <h3>Luxury Fashion Editorial</h3>
+                        <p>High-end fashion styling combining luxury pieces with contemporary aesthetics for sophisticated storytelling.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Street Style">
+                    <div class="portfolio-item-content">
+                        <h3>Urban Street Style</h3>
+                        <p>Contemporary street styling merging high fashion with urban elements for dynamic, wearable looks.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1503104834685-7205e8607eb9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80" alt="Minimalist Elegance">
+                    <div class="portfolio-item-content">
+                        <h3>Minimalist Elegance</h3>
+                        <p>Clean, sophisticated styling emphasizing quality fabrics and impeccable tailoring for timeless appeal.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1926&q=80" alt="Creative Direction">
+                    <div class="portfolio-item-content">
+                        <h3>Creative Direction</h3>
+                        <p>Complete visual storytelling through styling, combining conceptual thinking with practical execution.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1554568218-0f1715e72254?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80" alt="Brand Campaign">
+                    <div class="portfolio-item-content">
+                        <h3>Brand Campaign Styling</h3>
+                        <p>Commercial styling for fashion brands, creating cohesive visual narratives that align with brand identity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="container">
+            <h2>Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-camera"></i>
+                    <h3>Editorial Styling</h3>
+                    <p>Professional styling for magazine shoots, lookbooks, and editorial campaigns with creative direction and concept development.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-user-tie"></i>
+                    <h3>Personal Styling</h3>
+                    <p>One-on-one styling sessions for individuals looking to elevate their personal style and build a cohesive wardrobe.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-shopping-bag"></i>
+                    <h3>Brand Campaigns</h3>
+                    <p>Commercial styling for fashion brands, e-commerce shoots, and marketing campaigns that align with brand identity.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-star"></i>
+                    <h3>Special Events</h3>
+                    <p>Styling for red carpet events, premieres, award shows, and special occasions requiring show-stopping looks.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-palette"></i>
+                    <h3>Creative Direction</h3>
+                    <p>Complete creative direction for photo shoots including mood boards, styling concepts, and visual storytelling.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Styling Consultation</h3>
+                    <p>Professional consultation services for aspiring stylists and fashion industry professionals seeking expert guidance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:hello@queenshades.com">hello@queenshades.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+1234567890">+1 (234) 567-890</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-instagram"></i>
+                        <a href="https://www.instagram.com/_queenshades/" target="_blank">@_queenshades</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Available for projects worldwide</span>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Let's Work Together</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="project">Project Type</label>
+                            <input type="text" id="project" name="project" placeholder="e.g., Editorial, Personal Styling, Brand Campaign">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Tell me about your project..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://www.instagram.com/_queenshades/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-behance"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-pinterest"></i></a>
+            </div>
+            <p>&copy; 2025 Queen Shades. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced smooth scrolling function
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                const navHeight = document.querySelector('nav').offsetHeight;
+                const elementPosition = element.offsetTop - navHeight;
+                
+                window.scrollTo({
+                    top: elementPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Add event listeners for all navigation links
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle all anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    scrollToSection(targetId);
+                });
+            });
+
+            // Handle logo click
+            document.querySelector('.logo').addEventListener('click', function() {
+                scrollToSection('home');
+            });
+
+            // Handle CTA button
+            document.querySelector('.cta-button').addEventListener('click', function(e) {
+                e.preventDefault();
+                scrollToSection('portfolio');
+            });
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
+        });
+
+        // Enhanced scroll effect for navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(45, 27, 78, 0.98)';
+                nav.style.boxShadow = '0 2px 40px rgba(139, 69, 139, 0.5)';
+            } else {
+                nav.style.background = 'rgba(45, 27, 78, 0.95)';
+                nav.style.boxShadow = '0 2px 30px rgba(139, 69, 139, 0.3)';
+            }
